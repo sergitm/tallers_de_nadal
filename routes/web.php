@@ -18,4 +18,6 @@ Route::view('/', 'welcome')->name('welcome');
 Route::view('/login', 'login')->name('login');
 Route::view('/signup', 'signup')->name('signup');
 
+Route::get('/oauth')->name('oauth');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

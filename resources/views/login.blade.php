@@ -1,7 +1,7 @@
 @extends('layouts.form')
  
-@section('title', 'Login Page')
-@section('form-title', 'Login Form')
+@section('title', 'Login')
+@section('form-title', 'Entra amb Google')
  
 @section('navbar')
     @parent
@@ -9,17 +9,14 @@
 
 @section('form-content')
     <div class="container">
-        <div class="form-group row my-3">
-            <label class="col-5 text-left form-label" for="email">Introdueix l'email del centre:</label>
-            <input class="col form-control" type="text" name="email" id="email">
+        <div class="my-3">
+            <p class="text-center">Entra amb la compta de correu de l'institut:</p>
         </div>
-        <div class="form-group row mb-3">
-            <label class="col-5 text-left form-label" for="pwd">Contrasenya:</label>
-            <input class="col form-control" type="password" name="pwd" id="pwd">
+        <div class="mx-auto d-flex justify-content-center mb-3">
+            <a class="btn btn-lg btn-outline-dark border border-2" href="{{route('oauth')}}"><i class="fa-brands fa-google fa-2xl"></i></a>
         </div>
-        <div class="container d-flex justify-content-between">
+        <div class="container d-flex justify-content-start">
             <a class="btn btn-dark align-self-center mb-3" href="{{route('welcome')}}">Tornar</a>
-            <input type="submit" class="btn btn-dark align-self-center mb-3" name="entrar" value="Entra!">
         </div>
     </div>
 @endsection
