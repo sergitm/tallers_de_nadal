@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CallbackController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -24,10 +25,6 @@ Route::get('/auth/redirect', function () {
     return Socialite::driver('google')->redirect();
 })->name('redirect');
  
-Route::get('/auth/callback', function () {
-    $user = Socialite::driver('google')->user();
- 
-    dd($user->user['family_name']);
-})->name('callback');
+Route::get('/auth/callback', CallbackController::class)->name('callback');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
