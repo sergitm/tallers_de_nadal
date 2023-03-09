@@ -27,7 +27,7 @@ Route::get('/auth/redirect', function () {
 Route::get('/auth/callback', function () {
     $user = Socialite::driver('google')->user();
  
-    dd($user);
+    dd($user->user['family_name']);
 })->name('callback');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
