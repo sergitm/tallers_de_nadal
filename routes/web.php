@@ -15,10 +15,15 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::view('/', 'welcome')->name('welcome');
+Route::view('/', 'llista-tallers')->name('home');
 
 Route::view('/login', 'login')->name('login');
 Route::view('/signup', 'signup')->name('signup');
+
+Route::view('/nouTaller', 'nou-taller')->name('nou-taller');
+Route::view('/llistaTallers', 'llista-tallers')->name('llista-tallers');
+
+Route::view('/welcome', 'welcome')->name('welcome');
 
  
 Route::get('/auth/redirect', function () {
@@ -26,5 +31,3 @@ Route::get('/auth/redirect', function () {
 })->name('redirect');
  
 Route::get('/auth/callback', CallbackController::class)->name('callback');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

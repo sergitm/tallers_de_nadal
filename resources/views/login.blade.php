@@ -16,7 +16,7 @@
             <a class="btn btn-lg btn-outline-dark border border-2" href="{{route('redirect')}}"><i class="fa-brands fa-google fa-2xl"></i></a>
         </div>
         <div class="container d-flex justify-content-start">
-            <a class="btn btn-dark align-self-center mb-3" href="{{route('welcome')}}">Tornar</a>
+            <a class="btn btn-dark align-self-center mb-3" href="{{route('home')}}">Tornar</a>
         </div>
     </div>
 @endsection
