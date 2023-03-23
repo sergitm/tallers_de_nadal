@@ -5,9 +5,7 @@
         <h1 class="text-center">@yield('form-title')</h1>
         <hr class="border-3 border-top border-dark">
         <div class="form-inline justify-content-center">
-            <form method="POST" action="{{htmlspecialchars($_SERVER['PHP_SELF'])}}">
-                @yield('form-content')
-            </form>
+            @yield('form-content')
         </div>
     </div>
 @endsection

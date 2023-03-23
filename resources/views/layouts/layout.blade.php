@@ -26,10 +26,10 @@
                 <a class="nav-link" aria-current="page" href="{{route('home')}}">Home</a>
               @endif
 
-              @if(Route::current()->getName() === 'nou-taller')
-                <a class="nav-link active" href="{{route('nou-taller')}}">Nou Taller</a>
+              @if(Route::current()->getName() === 'taller.create')
+                <a class="nav-link active" href="{{route('taller.create')}}">Nou Taller</a>
               @else
-                <a class="nav-link" href="{{route('nou-taller')}}">Nou Taller</a>
+                <a class="nav-link" href="{{route('taller.create')}}">Nou Taller</a>
               @endif
               <a class="nav-link" href="#">Pricing</a>
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CallbackController;
+use App\Http\Controllers\TallerController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -15,15 +16,12 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::view('/', 'llista-tallers')->name('home');
+Route::resource('/taller', TallerController::class);
+
+Route::view('/', 'tallers.llista-tallers')->name('home');
 
 Route::view('/login', 'login')->name('login');
-Route::view('/signup', 'signup')->name('signup');
 
-Route::view('/nouTaller', 'nou-taller')->name('nou-taller');
-Route::view('/llistaTallers', 'llista-tallers')->name('llista-tallers');
-
-Route::view('/welcome', 'welcome')->name('welcome');
 
  
 Route::get('/auth/redirect', function () {
