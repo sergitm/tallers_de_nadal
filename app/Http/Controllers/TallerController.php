@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Taller;
-use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Facades\Auth;
 
 class TallerController extends Controller
 {
@@ -27,7 +27,7 @@ class TallerController extends Controller
 
         $nou_taller = new Taller;
         $nou_taller->id = ($taller->count()) ? $taller->id + 1 : 1;
-        $nou_taller->creador = 0;
+        $nou_taller->creador = Auth::user()->email;
 
         return view('tallers/nou-taller', compact('nou_taller'));
     }
@@ -51,18 +51,18 @@ class TallerController extends Controller
         ]);
         $taller = new Taller;
         $taller->nom = $request->nom;
-        $taller->creador = $request->proposat;
+        $taller->creador = Auth::user()->id;
         $taller->descripcio = $request->descripcio;
         $taller->adreçat = implode(',', $request->adresat);
         $taller->material = $request->material;
         $taller->observacions = $request->observacions;
         $taller->actiu = 0;
-
-        try {
-            $taller->save();
-        } catch (\Throwable $th) {
-            dd($th);
-        }
+        dd($request->user);
+        // try {
+        //     $taller->save();
+        // } catch (\Throwable $th) {
+        //     dd($th);
+        // }
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Usuari;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Auth;
 
 class CallbackController extends Controller
 {
@@ -15,17 +16,36 @@ class CallbackController extends Controller
     {
         $user = Socialite::driver('google')->user();
         
-        $usuari = new Usuari;
-        $usuari->email = $user->email;
-        $usuari->nom = $user->user['given_name'];
-        $usuari->cognoms = $user->user['family_name'];
-        $usuari->categoria = (strpos(explode('@', $user->email)[0], '.')) ? 'professor' : 'alumne';     // Si el correu conté un punt al principi, és un professor
-        $usuari->etapa;
-        $usuari->curs;
-        $usuari->grup;
-        $usuari->admin = false;
-        $usuari->superadmin = false;
-        
-        return dd($usuari);
+        if ($user->user['hd'] === 'sapalomera.cat') {
+            # code...
+            $usuari_existent = Usuari::where('email', $user->email)->first();
+
+            if ($usuari_existent) {
+                Auth::loginUsingId($usuari_existent->id);
+                return redirect()->route('home');
+            } else {
+
+                $usuari = new Usuari;
+                $usuari->email = $user->email;
+                $usuari->nom = $user->user['given_name'];
+                $usuari->cognoms = $user->user['family_name'];
+                $usuari->categoria = (strpos(explode('@', $user->email)[0], '.')) ? 'alumne' : 'professor';     // Si el correu conté un punt al principi, és un alumne
+                $usuari->etapa;
+                $usuari->curs;
+                $usuari->grup;
+                $usuari->admin = false;
+                $usuari->superadmin = false;
+                
+                if($usuari->save()){
+                    $auth_user = Usuari::where('email', $user->email)->first();
+                    Auth::loginUsingId($auth_user->id);
+                    return redirect()->route('home');
+                } else {
+                        
+                }
+            }
+        } else {
+
+        }
     }
 }

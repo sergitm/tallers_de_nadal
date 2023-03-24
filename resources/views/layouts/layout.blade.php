@@ -36,12 +36,16 @@
           </div>
           <div class="ml-auto">
             <div class="navbar-nav">
-              @if (Route::current()->getName() === 'login')
+              @if(Auth::check())
+                <p class="text-white nav-link">Hola, {{Auth::user()->nom}} :</p><a class="nav-link" href="{{route('login')}}">Logout</a>
+              @else  
+                @if (Route::current()->getName() === 'login')
                 <a class="nav-link active" href="{{route('login')}}">Login</a>
-              @else
+                @else
                 <a class="nav-link" href="{{route('login')}}">Login</a>
+                @endif
               @endif
-              </div>
+            </div>
           </div>
         </div>
       </nav>
