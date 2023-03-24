@@ -15,7 +15,7 @@ class CallbackController extends Controller
     public function __invoke(Request $request)
     {
         $user = Socialite::driver('google')->user();
-        
+    
         if ($user->user['hd'] === 'sapalomera.cat') {
             # code...
             $usuari_existent = Usuari::where('email', $user->email)->first();
