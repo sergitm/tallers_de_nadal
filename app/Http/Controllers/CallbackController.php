@@ -19,13 +19,13 @@ class CallbackController extends Controller
         $usuari->email = $user->email;
         $usuari->nom = $user->user['given_name'];
         $usuari->cognoms = $user->user['family_name'];
-        $usuari->categoria = (strpos(explode('@', $user->email)[0], '.')) ? 'professor' : 'alumne';     // Si el correu conté un punt al principi, és un professor
+        $usuari->categoria = (strpos(explode('@', $user->email)[0], '.')) ? 'alumne' : 'professor';     // Si el correu conté un punt al principi, és un alumne
         $usuari->etapa;
         $usuari->curs;
         $usuari->grup;
         $usuari->admin = false;
         $usuari->superadmin = false;
         
-        return dd($usuari);
+        return dd($user);
     }
 }
