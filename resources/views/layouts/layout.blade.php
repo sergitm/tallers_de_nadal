@@ -20,10 +20,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              @if(Route::current()->getName() === 'home')
-                <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
+              @if(Route::current()->getName() === 'taller.index')
+                <a class="nav-link active" aria-current="page" href="{{route('home')}}">Llista de tallers</a>
               @else
-                <a class="nav-link" aria-current="page" href="{{route('home')}}">Home</a>
+                <a class="nav-link" aria-current="page" href="{{route('home')}}">Llista de tallers</a>
               @endif
 
               @if(Route::current()->getName() === 'taller.create')
@@ -31,13 +31,37 @@
               @else
                 <a class="nav-link" href="{{route('taller.create')}}">Nou Taller</a>
               @endif
-              <a class="nav-link" href="#">Pricing</a>
+
+              @if(Auth::check() && (Auth::user()->admin || Auth::user()->superadmin))
+                @if(Route::current()->getName() === 'informes')
+                  <a class="nav-link active" href="{{route('informes')}}">Informes</a>
+                @else
+                  <a class="nav-link" href="{{route('informes')}}">Informes</a>
+                @endif
+              @endif
+
+              @if(Auth::check() && (Auth::user()->admin || Auth::user()->superadmin))
+                @if(Route::current()->getName() === 'llista_alumnes')
+                  <a class="nav-link active" href="{{route('llista_alumnes')}}">Alumnes del Centre</a>
+                @else
+                  <a class="nav-link" href="{{route('llista_alumnes')}}">Alumnes del Centre</a>
+                @endif
+              @endif
+
+              @if(Auth::check() && Auth::user()->superadmin)
+                @if(Route::current()->getName() === 'administracio')
+                  <a class="nav-link active" href="{{route('administracio')}}">Administracio</a>
+                @else
+                  <a class="nav-link" href="{{route('administracio')}}">Administracio</a>
+                @endif
+              @endif
+
             </div>
           </div>
           <div class="ml-auto">
             <div class="navbar-nav">
               @if(Auth::check())
-                <p class="text-white nav-link">Hola, {{Auth::user()->nom}} :</p><a class="nav-link" href="{{route('login')}}">Logout</a>
+                <span class="text-white nav-link">Hola, {{Auth::user()->nom}} |</span><a class="nav-link" href="{{route('login')}}">Logout</a>
               @else  
                 @if (Route::current()->getName() === 'login')
                 <a class="nav-link active" href="{{route('login')}}">Login</a>
@@ -52,7 +76,7 @@
     @show
 
     <div class="container"> 
-        @yield('form')
+        @yield('content')
     </div>
     
 </body>

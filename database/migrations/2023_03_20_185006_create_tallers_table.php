@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->foreignId('creador')->constrained('usuaris')->restrictOnDelete()->cascadeOnUpdate();
+            $table->foreignId('encarregat')->nullable()->constrained('usuaris')->nullOnDelete()->cascadeOnUpdate();
             $table->text('descripcio');
             $table->string('adreçat');
             $table->text('material');
-            $table->string('aula');
+            $table->integer('max_participants')->nullable();
+            $table->string('aula')->nullable();
             $table->text('observacions')->nullable();
             $table->boolean('actiu')->default(false);
             $table->timestamps();

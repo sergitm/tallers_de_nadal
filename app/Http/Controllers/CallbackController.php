@@ -19,7 +19,7 @@ class CallbackController extends Controller
         if ($user->user['hd'] === 'sapalomera.cat') {
             # code...
             $usuari_existent = Usuari::where('email', $user->email)->first();
-
+            // Llegin les dades de l'usuari que ens retorna Google, si ja existeix a la base de dades loguen i ja, si no existeix el creem
             if ($usuari_existent) {
                 Auth::loginUsingId($usuari_existent->id);
                 return redirect()->route('home');
@@ -41,11 +41,9 @@ class CallbackController extends Controller
                     Auth::loginUsingId($auth_user->id);
                     return redirect()->route('home');
                 } else {
-                        
+                    
                 }
             }
-        } else {
-
         }
     }
 }
